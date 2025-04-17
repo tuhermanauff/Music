@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Me gusta tu hermana</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #222;
+      color: #fff;
+      padding: 20px;
+    }
+    h1 {
+      color: red;
+    }
+    .player {
+      margin-top: 20px;
+    }
+    audio {
+      width: 100%;
+      margin-top: 10px;
+    }
+    .file-list {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Me gusta tu hermana</h1>
+  <p>Sube tus MP3 y escúchalos aquí mismo:</p>
+
+  <input type="file" id="fileInput" accept=".mp3" multiple />
+  <div class="file-list" id="fileList"></div>
+
+  <script>
+    const fileInput = document.getElementById('fileInput');
+    const fileList = document.getElementById('fileList');
+
+    fileInput.addEventListener('change', () => {
+      fileList.innerHTML = '';
+      Array.from(fileInput.files).forEach(file => {
+        const url = URL.createObjectURL(file);
+        const div = document.createElement('div');
+        div.className = 'player';
+        div.innerHTML = `<strong>${file.name}</strong><br><audio controls src="${url}"></audio>`;
+        fileList.appendChild(div);
+      });
+    });
+  </script>
+</body>
+</html>
